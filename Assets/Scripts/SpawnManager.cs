@@ -7,21 +7,24 @@ public class SpawnManager : MonoBehaviour
     [Header("Başlık Attım2")]
     private float spawnRate = 1.5f;
     public GameObject enemys;
-    public bool isGameActive;
+
     private int enemyNumber = 0;
     private int maxEnemyNumber = 0;
     public int zorlukseviyesi = 1;
     private int maxEnemyCountCal = 0;
     private GameManager gameManager;
+    private int waitForNextWave = 15;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
-        isGameActive = true;
-        StartCoroutine(SpawnTarget());
+       
+       
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+
+        StartCoroutine(SpawnTarget());
     }
 
     // Update is called once per frame
@@ -40,7 +43,7 @@ public class SpawnManager : MonoBehaviour
     }
     IEnumerator SpawnTarget()
     {
-        while (isGameActive)
+        while (gameManager.isGameActive)
         {
             yield return new WaitForSeconds(spawnRate);
             CountEnemy();
@@ -49,7 +52,7 @@ public class SpawnManager : MonoBehaviour
             {
                 case 1:
 
-                    if (isGameActive && enemyNumber <= maxEnemyCountCal)
+                    if (gameManager.isGameActive && enemyNumber <= maxEnemyCountCal)
                     {
                         Instantiate(enemys, RandomSpawnPosition(), enemys.transform.rotation);
                         maxEnemyNumber++;
@@ -57,7 +60,7 @@ public class SpawnManager : MonoBehaviour
                     if (maxEnemyNumber > maxEnemyCountCal)
                     {
                         gameManager.NextWaveRutine(zorlukseviyesi);
-                        yield return new WaitForSeconds(10);
+                        yield return new WaitForSeconds(waitForNextWave);
                         gameManager.NextWaveRutineDeAct();
                         zorlukseviyesi++;
                         maxEnemyCountCal += maxEnemyNumber;
@@ -68,7 +71,7 @@ public class SpawnManager : MonoBehaviour
                 case 2:
  
                    
-                    if (isGameActive && enemyNumber <= maxEnemyCountCal)
+                    if (gameManager.isGameActive && enemyNumber <= maxEnemyCountCal)
                     {
                         Instantiate(enemys, RandomSpawnPosition(), enemys.transform.rotation);
                         maxEnemyNumber++;
@@ -76,7 +79,7 @@ public class SpawnManager : MonoBehaviour
                     if (maxEnemyNumber > maxEnemyCountCal)
                     {
                         gameManager.NextWaveRutine(zorlukseviyesi);
-                        yield return new WaitForSeconds(10);
+                        yield return new WaitForSeconds(waitForNextWave);
                         gameManager.NextWaveRutineDeAct();
                         zorlukseviyesi++;
                         maxEnemyCountCal += maxEnemyNumber;
@@ -86,7 +89,7 @@ public class SpawnManager : MonoBehaviour
                     break;
                 case 3:
                    
-                    if (isGameActive && enemyNumber <= maxEnemyCountCal)
+                    if (gameManager.isGameActive && enemyNumber <= maxEnemyCountCal)
                     {
                         Instantiate(enemys, RandomSpawnPosition(), enemys.transform.rotation);
                         maxEnemyNumber++;
@@ -94,7 +97,7 @@ public class SpawnManager : MonoBehaviour
                     if (maxEnemyNumber > maxEnemyCountCal)
                     {
                         gameManager.NextWaveRutine(zorlukseviyesi);
-                        yield return new WaitForSeconds(10);
+                        yield return new WaitForSeconds(waitForNextWave);
                         gameManager.NextWaveRutineDeAct();
                         zorlukseviyesi++;
                         maxEnemyCountCal += maxEnemyNumber;
@@ -104,7 +107,7 @@ public class SpawnManager : MonoBehaviour
                     break;
                 case 4:
 
-                    if (isGameActive && enemyNumber <= maxEnemyCountCal)
+                    if (gameManager.isGameActive && enemyNumber <= maxEnemyCountCal)
                     {
                         Instantiate(enemys, RandomSpawnPosition(), enemys.transform.rotation);
                         maxEnemyNumber++;
@@ -112,7 +115,7 @@ public class SpawnManager : MonoBehaviour
                     if (maxEnemyNumber > maxEnemyCountCal)
                     {
                         gameManager.NextWaveRutine(zorlukseviyesi);
-                        yield return new WaitForSeconds(10);
+                        yield return new WaitForSeconds(waitForNextWave);
                         gameManager.NextWaveRutineDeAct();
                         zorlukseviyesi++;
                         maxEnemyCountCal += maxEnemyNumber;
@@ -122,7 +125,7 @@ public class SpawnManager : MonoBehaviour
                     break;
                 case 5:
 
-                    if (isGameActive && enemyNumber <= maxEnemyCountCal)
+                    if (gameManager.isGameActive && enemyNumber <= maxEnemyCountCal)
                     {
                         Instantiate(enemys, RandomSpawnPosition(), enemys.transform.rotation);
                         maxEnemyNumber++;
@@ -130,7 +133,7 @@ public class SpawnManager : MonoBehaviour
                     if (maxEnemyNumber > maxEnemyCountCal)
                     {
                         gameManager.NextWaveRutine(zorlukseviyesi);
-                        yield return new WaitForSeconds(10);
+                        yield return new WaitForSeconds(waitForNextWave);
                         gameManager.NextWaveRutineDeAct();
                         zorlukseviyesi++;
                         maxEnemyCountCal += maxEnemyNumber;
@@ -140,7 +143,7 @@ public class SpawnManager : MonoBehaviour
                     break;
                 case 6:
 
-                    if (isGameActive && enemyNumber <= maxEnemyCountCal)
+                    if (gameManager.isGameActive && enemyNumber <= maxEnemyCountCal)
                     {
                         Instantiate(enemys, RandomSpawnPosition(), enemys.transform.rotation);
                         maxEnemyNumber++;
@@ -148,7 +151,7 @@ public class SpawnManager : MonoBehaviour
                     if (maxEnemyNumber > maxEnemyCountCal)
                     {
                         gameManager.NextWaveRutine(zorlukseviyesi);
-                        yield return new WaitForSeconds(10);
+                        yield return new WaitForSeconds(waitForNextWave);
                         gameManager.NextWaveRutineDeAct();
                         zorlukseviyesi++;
                         maxEnemyCountCal += maxEnemyNumber;
@@ -158,7 +161,7 @@ public class SpawnManager : MonoBehaviour
                     break;
                 case 7:
 
-                    if (isGameActive && enemyNumber <= maxEnemyCountCal)
+                    if (gameManager.isGameActive && enemyNumber <= maxEnemyCountCal)
                     {
                         Instantiate(enemys, RandomSpawnPosition(), enemys.transform.rotation);
                         maxEnemyNumber++;
@@ -166,7 +169,7 @@ public class SpawnManager : MonoBehaviour
                     if (maxEnemyNumber > maxEnemyCountCal)
                     {
                         gameManager.NextWaveRutine(zorlukseviyesi);
-                        yield return new WaitForSeconds(10);
+                        yield return new WaitForSeconds(waitForNextWave);
                         gameManager.NextWaveRutineDeAct();
                         zorlukseviyesi++;
                         maxEnemyCountCal += maxEnemyNumber;

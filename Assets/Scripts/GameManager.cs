@@ -9,15 +9,16 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
 
-    [Header("Başlık Attım")]
     private int score = 0;
     public TextMeshProUGUI nextWave;
     public TextMeshProUGUI scoreText;
-    
+    public bool isGameActive = true;
+
     // Start is called before the first frame update
     void Start()
-    {
+    { 
         nextWave.gameObject.SetActive(false);
+     
     }
 
     // Update is called once per frame
@@ -47,5 +48,14 @@ public class GameManager : MonoBehaviour
         scoreText.text = "Score: " + score;
 
     }
-   
+
+    private void OnMouseDown()
+    {
+        if (true)
+        {
+
+        }
+        
+    }
+
 }

@@ -37,12 +37,15 @@ public class LevelGenerator : MonoBehaviour
               
               if (Random.value > .9f)
                 {
+                    Vector3 pos = new Vector3(x - width / 2f, 1f, y - height / 2f);
 
+      
+                        Instantiate(wall, pos, Quaternion.identity, transform);
                  
                     //duvar koy
 
-                    Vector3 pos = new Vector3(x - width / 2f, 1f, y - height / 2f);
-                    Instantiate(wall, pos, Quaternion.identity, transform);
+                    
+                    //Instantiate(wall, pos, Quaternion.identity, transform);
 
                 }
                 //else if (!playerSpawned)

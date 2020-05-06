@@ -9,6 +9,7 @@ public class SpawnManager : MonoBehaviour
     private float spawnRate = 1.5f;
     public GameObject enemys;
 
+
     private int enemyNumber = 0;
     private int wallNumber = 0;
 
@@ -29,7 +30,7 @@ public class SpawnManager : MonoBehaviour
         player = GameObject.Find("Player").GetComponent<Player>();
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         levelGenerator = GameObject.Find("Level Auto Generate").GetComponent<LevelGenerator>();
-
+      
         StartCoroutine(SpawnTarget());
     }
 
@@ -52,6 +53,20 @@ public class SpawnManager : MonoBehaviour
     {
         wallNumber = (GameObject.FindGameObjectsWithTag("Duvar")).Length;
     }
+    void DestroyWalls()
+    {
+        for (int i = 0; i < GameObject.FindGameObjectsWithTag("Duvar").Length; i++)
+        {
+            Destroy(GameObject.FindGameObjectsWithTag("Duvar")[i]);
+        }
+        for (int i = 0; i < GameObject.FindGameObjectsWithTag("Turret").Length; i++)
+        {
+            Destroy(GameObject.FindGameObjectsWithTag("Turret")[i]);
+        }
+
+
+    }
+
     IEnumerator SpawnTarget()
     {
         while (gameManager.isGameActive)
@@ -83,12 +98,9 @@ public class SpawnManager : MonoBehaviour
                             maxEnemyCountCal += maxEnemyNumber;
                             maxEnemyNumber = 0;
                             player.PlayerPositionReset();
-                        if (wallNumber< 10)
-                        {
+           
+                            DestroyWalls();
                             levelGenerator.GenerateLevel();
-                        }
-                          
-
 
 
                     }
@@ -110,10 +122,10 @@ public class SpawnManager : MonoBehaviour
                         maxEnemyCountCal += maxEnemyNumber;
                         maxEnemyNumber = 0;
                         player.PlayerPositionReset();
-                        if (wallNumber < 10)
-                        {
-                            levelGenerator.GenerateLevel();
-                        }
+
+                        DestroyWalls();
+                        levelGenerator.GenerateLevel();
+                        
 
                     }
 
@@ -134,10 +146,8 @@ public class SpawnManager : MonoBehaviour
                         maxEnemyCountCal += maxEnemyNumber;
                         maxEnemyNumber = 0;
                         player.PlayerPositionReset();
-                        if (wallNumber < 10)
-                        {
-                            levelGenerator.GenerateLevel();
-                        }
+                        DestroyWalls();
+                        levelGenerator.GenerateLevel();
                     }
 
                     break;
@@ -157,10 +167,8 @@ public class SpawnManager : MonoBehaviour
                         maxEnemyCountCal += maxEnemyNumber;
                         maxEnemyNumber = 0;
                         player.PlayerPositionReset();
-                        if (wallNumber < 10)
-                        {
-                            levelGenerator.GenerateLevel();
-                        }
+                        DestroyWalls();
+                        levelGenerator.GenerateLevel();
                     }
 
                     break;
@@ -181,10 +189,8 @@ public class SpawnManager : MonoBehaviour
                         maxEnemyNumber = 0;
 
                         player.PlayerPositionReset();
-                        if (wallNumber < 10)
-                        {
-                            levelGenerator.GenerateLevel();
-                        }
+                        DestroyWalls();
+                        levelGenerator.GenerateLevel();
                     }
 
                     break;
@@ -205,10 +211,8 @@ public class SpawnManager : MonoBehaviour
                         maxEnemyNumber = 0;
 
                         player.PlayerPositionReset();
-                        if (wallNumber < 10)
-                        {
-                            levelGenerator.GenerateLevel();
-                        }
+                        DestroyWalls();
+                        levelGenerator.GenerateLevel();
                     }
 
                     break;
@@ -228,10 +232,8 @@ public class SpawnManager : MonoBehaviour
                         maxEnemyCountCal += maxEnemyNumber;
                         maxEnemyNumber = 0;
                         player.PlayerPositionReset();
-                        if (wallNumber < 10)
-                        {
-                            levelGenerator.GenerateLevel();
-                        }
+                        DestroyWalls();
+                        levelGenerator.GenerateLevel();
                     }
 
                     break;

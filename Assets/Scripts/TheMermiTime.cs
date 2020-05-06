@@ -10,13 +10,18 @@ public class TheMermiTime : MonoBehaviour
     private float explosionTime = 5f;
 
     private GameManager gameManager;
+
+
     private int puan = 100;
+
+
 
 
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+
     }
 
     // Update is called once per frame
@@ -55,12 +60,17 @@ public class TheMermiTime : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Enemy"))
         {
+           
 
-            ParticleSystem newExplosion = Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation) as ParticleSystem;
-            Destroy(other.gameObject);
-            Destroy(gameObject);
-            Destroy(newExplosion.gameObject, explosionTime);
-            gameManager.ScoreBoard(puan);
+
+                ParticleSystem newExplosion = Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation) as ParticleSystem;
+                Destroy(other.gameObject);
+                Destroy(gameObject);
+                Destroy(newExplosion.gameObject, explosionTime);
+                gameManager.ScoreBoard(puan);
+
+
+           
         }
 
 

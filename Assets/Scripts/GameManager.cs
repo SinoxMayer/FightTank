@@ -9,22 +9,42 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
 
-    private int score = 0;
+    public int score = 0;
+    public int health = 0;
+    public int maxHealth = 100;
+
+
     public TextMeshProUGUI nextWave;
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI buyHelpText;
+
+
     public bool isGameActive = true;
+    bool turnedOn =false;
 
     // Start is called before the first frame update
     void Start()
-    { 
+    {
+        health = maxHealth;
         nextWave.gameObject.SetActive(false);
+        ScoreBoard(0);
      
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+     
+
+        if (score>600 && !turnedOn)
+        {
+            buyHelpText.gameObject.SetActive(true);
+            turnedOn = true;
+        }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            buyHelpText.gameObject.SetActive(false);
+        }
     }
 
 
@@ -49,13 +69,8 @@ public class GameManager : MonoBehaviour
 
     }
 
-    private void OnMouseDown()
-    {
-        if (true)
-        {
 
-        }
-        
-    }
+
+
 
 }

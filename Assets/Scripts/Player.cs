@@ -20,6 +20,11 @@ public class Player : MonoBehaviour
     public Transform namlu;
 
 
+    public int maxHealt = 100;
+    public int currentHealt = 0;
+
+
+
     public Transform m_FireTransform;
     public Rigidbody m_Mermi;
     private float speed = 3500f;
@@ -30,6 +35,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         playerAudio = GetComponent<AudioSource>();
+        currentHealt = maxHealt;
     }
 
     // Update is called once per frame

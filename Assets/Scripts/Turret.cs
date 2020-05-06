@@ -7,22 +7,25 @@ public class Turret : MonoBehaviour
     private Transform target;
 
     public float range = 10f;
+    public float fireRate = 1f;
 
     public Transform rotate;
-
-
-
-
 
     public Transform m_FireTransform;
     public Rigidbody m_Mermi;
     private float speed = 3500f;
+
+    private  GroundPlacementComp groundPlacementComp;
+
     public ParticleSystem namluPatlama;
+    private float fireCountDown = 0f;
 
     // Start is called before the first frame update
     void Start()
     {
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
+        groundPlacementComp = GameObject.Find("Turret Placement Controller").GetComponent<GroundPlacementComp>();
+       
     }
 
     // Update is called once per frame
@@ -38,6 +41,13 @@ public class Turret : MonoBehaviour
         Vector3 rotation = Quaternion.Lerp(rotate.rotation, lookRotation , Time.deltaTime * 10f).eulerAngles;
         rotate.rotation = Quaternion.Euler(0f, rotation.y, 0f);
 
+        if (fireCountDown <= 0f && groundPlacementComp.placedToGround)
+        {
+            Shoot();
+            fireCountDown = 1f / fireRate;
+        }
+
+        fireCountDown -= Time.deltaTime;
 
     }
 
@@ -65,6 +75,18 @@ public class Turret : MonoBehaviour
 
     }
 
+    void Shoot()
+    {
+       
+            Rigidbody shellInstance =
+            Instantiate(m_Mermi, m_FireTransform.position, m_FireTransform.rotation) as Rigidbody;
+
+            shellInstance.velocity = speed * m_FireTransform.forward * Time.deltaTime;
+
+            ParticleSystem newNamluExplosion = Instantiate(namluPatlama, m_FireTransform.position, m_FireTransform.rotation) as ParticleSystem;
+
+            Destroy(newNamluExplosion.gameObject,0.5f);
+    }
    
 
     //Range i görebilmek için kırmızı gizmos çizmek

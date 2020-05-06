@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
@@ -9,20 +10,25 @@ public class SpawnManager : MonoBehaviour
     public GameObject enemys;
 
     private int enemyNumber = 0;
+    private int wallNumber = 0;
+
     private int maxEnemyNumber = 0;
     public int zorlukseviyesi = 1;
     private int maxEnemyCountCal = 0;
     private GameManager gameManager;
-    private int waitForNextWave = 15;
+    private int waitForNextWave = 10;
+    [SerializeField]private Player player;
+    [SerializeField] private LevelGenerator levelGenerator;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
-       
-       
+
+        player = GameObject.Find("Player").GetComponent<Player>();
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        levelGenerator = GameObject.Find("Level Auto Generate").GetComponent<LevelGenerator>();
 
         StartCoroutine(SpawnTarget());
     }
@@ -38,8 +44,13 @@ public class SpawnManager : MonoBehaviour
    void CountEnemy()
     {
         enemyNumber = (GameObject.FindGameObjectsWithTag("Enemy")).Length;
+
         Debug.Log(enemyNumber);
        
+    }
+    void CountWalls()
+    {
+        wallNumber = (GameObject.FindGameObjectsWithTag("Duvar")).Length;
     }
     IEnumerator SpawnTarget()
     {
@@ -47,36 +58,50 @@ public class SpawnManager : MonoBehaviour
         {
             yield return new WaitForSeconds(spawnRate);
             CountEnemy();
+            CountWalls();
             maxEnemyCountCal = zorlukseviyesi * 2 + 5;
+         
+            
+
             switch (zorlukseviyesi)
             {
                 case 1:
 
-                    if (gameManager.isGameActive && enemyNumber <= maxEnemyCountCal)
+                    if (gameManager.isGameActive && enemyNumber <= maxEnemyCountCal && maxEnemyNumber <= maxEnemyCountCal)
                     {
                         Instantiate(enemys, RandomSpawnPosition(), enemys.transform.rotation);
                         maxEnemyNumber++;
                     }
-                    if (maxEnemyNumber > maxEnemyCountCal)
+                    if (maxEnemyNumber > maxEnemyCountCal && enemyNumber == 0)
                     {
-                        gameManager.NextWaveRutine(zorlukseviyesi);
-                        yield return new WaitForSeconds(waitForNextWave);
-                        gameManager.NextWaveRutineDeAct();
-                        zorlukseviyesi++;
-                        maxEnemyCountCal += maxEnemyNumber;
-                        maxEnemyNumber = 0;
-                      
+                       
+                   
+                            gameManager.NextWaveRutine(zorlukseviyesi);
+                            yield return new WaitForSeconds(waitForNextWave);
+                            gameManager.NextWaveRutineDeAct();
+                            zorlukseviyesi++;
+                            maxEnemyCountCal += maxEnemyNumber;
+                            maxEnemyNumber = 0;
+                            player.PlayerPositionReset();
+                        if (wallNumber< 10)
+                        {
+                            levelGenerator.GenerateLevel();
+                        }
+                          
+
+
+
                     }
                     break;
                 case 2:
  
                    
-                    if (gameManager.isGameActive && enemyNumber <= maxEnemyCountCal)
+                    if (gameManager.isGameActive && enemyNumber <= maxEnemyCountCal && maxEnemyNumber <= maxEnemyCountCal)
                     {
                         Instantiate(enemys, RandomSpawnPosition(), enemys.transform.rotation);
                         maxEnemyNumber++;
                     }
-                    if (maxEnemyNumber > maxEnemyCountCal)
+                    if (maxEnemyNumber > maxEnemyCountCal && enemyNumber == 0)
                     {
                         gameManager.NextWaveRutine(zorlukseviyesi);
                         yield return new WaitForSeconds(waitForNextWave);
@@ -84,17 +109,23 @@ public class SpawnManager : MonoBehaviour
                         zorlukseviyesi++;
                         maxEnemyCountCal += maxEnemyNumber;
                         maxEnemyNumber = 0;
+                        player.PlayerPositionReset();
+                        if (wallNumber < 10)
+                        {
+                            levelGenerator.GenerateLevel();
+                        }
+
                     }
 
                     break;
                 case 3:
                    
-                    if (gameManager.isGameActive && enemyNumber <= maxEnemyCountCal)
+                    if (gameManager.isGameActive && enemyNumber <= maxEnemyCountCal && maxEnemyNumber <= maxEnemyCountCal)
                     {
                         Instantiate(enemys, RandomSpawnPosition(), enemys.transform.rotation);
                         maxEnemyNumber++;
                     }
-                    if (maxEnemyNumber > maxEnemyCountCal)
+                    if (maxEnemyNumber > maxEnemyCountCal && enemyNumber == 0)
                     {
                         gameManager.NextWaveRutine(zorlukseviyesi);
                         yield return new WaitForSeconds(waitForNextWave);
@@ -102,17 +133,22 @@ public class SpawnManager : MonoBehaviour
                         zorlukseviyesi++;
                         maxEnemyCountCal += maxEnemyNumber;
                         maxEnemyNumber = 0;
+                        player.PlayerPositionReset();
+                        if (wallNumber < 10)
+                        {
+                            levelGenerator.GenerateLevel();
+                        }
                     }
 
                     break;
                 case 4:
 
-                    if (gameManager.isGameActive && enemyNumber <= maxEnemyCountCal)
+                    if (gameManager.isGameActive && enemyNumber <= maxEnemyCountCal && maxEnemyNumber <= maxEnemyCountCal)
                     {
                         Instantiate(enemys, RandomSpawnPosition(), enemys.transform.rotation);
                         maxEnemyNumber++;
                     }
-                    if (maxEnemyNumber > maxEnemyCountCal)
+                    if (maxEnemyNumber > maxEnemyCountCal && enemyNumber == 0)
                     {
                         gameManager.NextWaveRutine(zorlukseviyesi);
                         yield return new WaitForSeconds(waitForNextWave);
@@ -120,17 +156,22 @@ public class SpawnManager : MonoBehaviour
                         zorlukseviyesi++;
                         maxEnemyCountCal += maxEnemyNumber;
                         maxEnemyNumber = 0;
+                        player.PlayerPositionReset();
+                        if (wallNumber < 10)
+                        {
+                            levelGenerator.GenerateLevel();
+                        }
                     }
 
                     break;
                 case 5:
 
-                    if (gameManager.isGameActive && enemyNumber <= maxEnemyCountCal)
+                    if (gameManager.isGameActive && enemyNumber <= maxEnemyCountCal && maxEnemyNumber <= maxEnemyCountCal)
                     {
                         Instantiate(enemys, RandomSpawnPosition(), enemys.transform.rotation);
                         maxEnemyNumber++;
                     }
-                    if (maxEnemyNumber > maxEnemyCountCal)
+                    if (maxEnemyNumber > maxEnemyCountCal && enemyNumber == 0)
                     {
                         gameManager.NextWaveRutine(zorlukseviyesi);
                         yield return new WaitForSeconds(waitForNextWave);
@@ -138,17 +179,23 @@ public class SpawnManager : MonoBehaviour
                         zorlukseviyesi++;
                         maxEnemyCountCal += maxEnemyNumber;
                         maxEnemyNumber = 0;
+
+                        player.PlayerPositionReset();
+                        if (wallNumber < 10)
+                        {
+                            levelGenerator.GenerateLevel();
+                        }
                     }
 
                     break;
                 case 6:
 
-                    if (gameManager.isGameActive && enemyNumber <= maxEnemyCountCal)
+                    if (gameManager.isGameActive && enemyNumber <= maxEnemyCountCal && maxEnemyNumber <= maxEnemyCountCal)
                     {
                         Instantiate(enemys, RandomSpawnPosition(), enemys.transform.rotation);
                         maxEnemyNumber++;
                     }
-                    if (maxEnemyNumber > maxEnemyCountCal)
+                    if (maxEnemyNumber > maxEnemyCountCal && enemyNumber == 0)
                     {
                         gameManager.NextWaveRutine(zorlukseviyesi);
                         yield return new WaitForSeconds(waitForNextWave);
@@ -156,17 +203,23 @@ public class SpawnManager : MonoBehaviour
                         zorlukseviyesi++;
                         maxEnemyCountCal += maxEnemyNumber;
                         maxEnemyNumber = 0;
+
+                        player.PlayerPositionReset();
+                        if (wallNumber < 10)
+                        {
+                            levelGenerator.GenerateLevel();
+                        }
                     }
 
                     break;
                 case 7:
 
-                    if (gameManager.isGameActive && enemyNumber <= maxEnemyCountCal)
+                    if (gameManager.isGameActive && enemyNumber <= maxEnemyCountCal && maxEnemyNumber <= maxEnemyCountCal)
                     {
                         Instantiate(enemys, RandomSpawnPosition(), enemys.transform.rotation);
                         maxEnemyNumber++;
                     }
-                    if (maxEnemyNumber > maxEnemyCountCal)
+                    if (maxEnemyNumber > maxEnemyCountCal && enemyNumber == 0)
                     {
                         gameManager.NextWaveRutine(zorlukseviyesi);
                         yield return new WaitForSeconds(waitForNextWave);
@@ -174,6 +227,11 @@ public class SpawnManager : MonoBehaviour
                         zorlukseviyesi++;
                         maxEnemyCountCal += maxEnemyNumber;
                         maxEnemyNumber = 0;
+                        player.PlayerPositionReset();
+                        if (wallNumber < 10)
+                        {
+                            levelGenerator.GenerateLevel();
+                        }
                     }
 
                     break;

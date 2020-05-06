@@ -38,6 +38,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.W))
         {
+           
             playerAudio.PlayOneShot(speedup,0.28f);
         }
 
@@ -81,5 +82,12 @@ public class Player : MonoBehaviour
 
 
         }
+    }
+
+    public void PlayerPositionReset()
+    {
+
+        Vector3 originalPos = new Vector3(-1.745856f, 0.8f, -23.18391f);
+        transform.position = originalPos;
     }
 }

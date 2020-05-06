@@ -10,6 +10,15 @@ public class Turret : MonoBehaviour
 
     public Transform rotate;
 
+
+
+
+
+    public Transform m_FireTransform;
+    public Rigidbody m_Mermi;
+    private float speed = 3500f;
+    public ParticleSystem namluPatlama;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +38,9 @@ public class Turret : MonoBehaviour
         Vector3 rotation = Quaternion.Lerp(rotate.rotation, lookRotation , Time.deltaTime * 10f).eulerAngles;
         rotate.rotation = Quaternion.Euler(0f, rotation.y, 0f);
 
+
     }
+
 
     void UpdateTarget()
     {
@@ -54,6 +65,7 @@ public class Turret : MonoBehaviour
 
     }
 
+   
 
     //Range i görebilmek için kırmızı gizmos çizmek
 
